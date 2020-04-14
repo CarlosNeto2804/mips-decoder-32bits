@@ -426,7 +426,7 @@ void encode(FILE *output, FILE *input)
 		}
 
 		if (unkown)
-			error("unknown command");
+			error("Comando não suportado");
 	}
 	free(line);
 }
