@@ -102,7 +102,6 @@
 	/**
 	 * @name Codigo da função 
 	 */
-	/**@{*/
 	#define INST_ADD_FUNCT_STR  "100000"
 	#define INST_SUB_FUNCT_STR  "100010"
 	#define INST_MULT_FUNCT_STR "011000"

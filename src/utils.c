@@ -22,7 +22,6 @@ static void reverse(char *str, int len)
 	while (start < end)
 	{
 		char tmp;
-
 		tmp = *(str+start);
 		*(str+start) = *(str+end);
 		*(str+end) = tmp;

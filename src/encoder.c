@@ -8,14 +8,14 @@
 extern struct inst instructions[];
 extern struct reg registers[];
 const char *delim = " ,()";
-static const char *register_lookup(const char *regname)
+static const char *register_lookup(const char *register_name)
 {
-	if (regname == NULL)
+	if (register_name == NULL)
 		return (NULL);
 
 	for (int i = 0; i < REG_NUM; i++)
 	{
-		if (!strcmp(registers[i].name, regname))
+		if (!strcmp(registers[i].name, register_name))
 			return (registers[i].code);
 	}
 
@@ -31,11 +31,10 @@ static const char *opcode_lookup(const char *inst)
 		if (!strcmp(instructions[i].name, inst))
 			return (instructions[i].opcode);
 	}
-
 	return (NULL);
 }
 
-static const char *funct_lookup(const char *cmd)
+static const char *function_lookup(const char *cmd)
 {
 	if (cmd == NULL)
 		return (NULL);
@@ -92,7 +91,7 @@ static void encode_r_instruction(FILE *output, const char *inst)
 	check((rs = register_lookup(strtok(NULL, delim))) != NULL);
 	check((rt = register_lookup(strtok(NULL, delim))) != NULL);
 	check((opcode = opcode_lookup(inst)) != NULL);
-	check((funct = funct_lookup(inst)) != NULL);
+	check((funct = function_lookup(inst)) != NULL);
 
 	fprintf(output, "%s%s%s%s%s%s\n",
 			opcode,
@@ -122,7 +121,7 @@ static void encode_mult(FILE *output, const char *inst)
 	check((rs = register_lookup(strtok(NULL, delim))) != NULL);
 	check((rt = register_lookup(strtok(NULL, delim))) != NULL);
 	check((opcode = opcode_lookup(inst)) != NULL);
-	check((funct = funct_lookup(inst)) != NULL);
+	check((funct = function_lookup(inst)) != NULL);
 
 	fprintf(output, "%s%s%s%s%s%s\n",
 			opcode,
@@ -142,7 +141,7 @@ static void encode_div(FILE *output, const char *inst)
 	check((rs = register_lookup(strtok(NULL, delim))) != NULL);
 	check((rt = register_lookup(strtok(NULL, delim))) != NULL);
 	check((opcode = opcode_lookup(inst)) != NULL);
-	check((funct = funct_lookup(inst)) != NULL);
+	check((funct = function_lookup(inst)) != NULL);
 
 	fprintf(output, "%s%s%s%s%s%s\n",
 			opcode,
@@ -186,7 +185,7 @@ static void encode_sll(FILE *output, const char *inst)
 	check((rt = register_lookup(strtok(NULL, delim))) != NULL);
 	check((shamt10 = strtok(NULL, delim)) != NULL);
 	check((opcode = opcode_lookup(inst)) != NULL);
-	check((funct = funct_lookup(inst)) != NULL);
+	check((funct = function_lookup(inst)) != NULL);
 
 	itoa2(atoi(shamt10), shamt2, 2);
 
@@ -211,7 +210,7 @@ static void encode_srl(FILE *output, const char *inst)
 	check((rt = register_lookup(strtok(NULL, delim))) != NULL);
 	check((shamt10 = strtok(NULL, delim)) != NULL);
 	check((opcode = opcode_lookup(inst)) != NULL);
-	check((funct = funct_lookup(inst)) != NULL);
+	check((funct = function_lookup(inst)) != NULL);
 
 	itoa2(atoi(shamt10), shamt2, 2);
 
@@ -231,7 +230,7 @@ static void encode_jr(FILE *output, const char *inst)
 
 	check((rs = register_lookup(strtok(NULL, delim))) != NULL);
 	check((opcode = opcode_lookup(inst)) != NULL);
-	check((funct = funct_lookup(inst)) != NULL);
+	check((funct = function_lookup(inst)) != NULL);
 
 	fprintf(output, "%s%s%s%s%s%s\n",
 			opcode,
